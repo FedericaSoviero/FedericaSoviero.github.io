@@ -39,10 +39,12 @@ document.querySelectorAll('.system-tabs button').forEach((button) => {
 
 const projects = {
   skillschool: {
-    number: '01', type: 'CRM · FULL STACK', title: 'SkillSchool',
-    description: 'Una piattaforma per gestire le attività di un ente di formazione. Il backend espone servizi REST e il frontend React offre aree dedicate ad amministrazione, segreteria, docenti e corsisti.',
+    number: '01', type: 'CRM · SVILUPPO CON AGENTE AI', title: 'SkillSchool',
+    description: 'CRM per la gestione di un ente di formazione, progettato a partire da requisiti reali e sviluppato attraverso la guida di un agente AI.',
+    problem: 'Riunire in un’unica applicazione la gestione del catalogo, delle edizioni, delle iscrizioni, della didattica, delle presenze, dei pagamenti e delle scadenze, offrendo esperienze dedicate ad amministrazione, segreteria, docenti e corsisti.',
+    contribution: 'Ho analizzato le richieste del cliente, scelto le tecnologie e progettato il modello ER. Ho poi fornito il modello all’agente AI e ne ho guidato e supervisionato il lavoro durante l’intero sviluppo. Il codice è stato realizzato con l’AI; il mio contributo è stato governare l’agente, definire la direzione tecnica, verificare i risultati e correggere il percorso quando necessario.',
     features: ['Catalogo corsi, edizioni e moduli', 'Corsisti, docenti, dipendenti e aule', 'Iscrizioni, presenze e lezioni', 'Ordini, rate, pagamenti e contabilità', 'Appuntamenti e notifiche in tempo reale'],
-    tech: ['Java 17', 'Spring Boot', 'Spring Data JPA', 'Spring Security', 'REST API', 'JWT', 'React', 'React Router', 'PostgreSQL', 'Hibernate', 'Maven']
+    tech: ['Sviluppo agentico', 'Java 17', 'Spring Boot', 'Spring Data JPA', 'Spring Security', 'REST API', 'JWT', 'React', 'React Router', 'PostgreSQL', 'Hibernate', 'Maven']
   },
   formazione: {
     number: '02', type: 'GESTIONALE · MONOLITE', title: 'GestFormazione',
@@ -70,6 +72,10 @@ const fillModal = (project) => {
   modal.querySelector('.modal-type').textContent = project.type;
   modal.querySelector('#modal-title').textContent = project.title;
   modal.querySelector('.modal-description').textContent = project.description;
+  modal.querySelector('.modal-problem').textContent = project.problem || project.description;
+  const contributionWrap = modal.querySelector('.modal-contribution-wrap');
+  contributionWrap.hidden = !project.contribution;
+  modal.querySelector('.modal-contribution').textContent = project.contribution || '';
   modal.querySelector('.modal-features').innerHTML = project.features.map((item) => `<li>${item}</li>`).join('');
   modal.querySelector('.modal-tech').innerHTML = project.tech.map((item) => `<span>${item}</span>`).join('');
 };
