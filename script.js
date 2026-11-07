@@ -81,3 +81,25 @@ modal.querySelector('.modal-close').addEventListener('click', () => modal.close(
 modal.addEventListener('click', (event) => {
   if (event.target === modal) modal.close();
 });
+
+const menuToggle = document.querySelector('.menu-toggle');
+const mobileMenu = document.querySelector('.mobile-menu');
+const setMobileMenu = (open) => {
+  menuToggle.classList.toggle('active', open);
+  mobileMenu.classList.toggle('open', open);
+  menuToggle.setAttribute('aria-expanded', String(open));
+  menuToggle.setAttribute('aria-label', open ? 'Chiudi il menu' : 'Apri il menu');
+  mobileMenu.setAttribute('aria-hidden', String(!open));
+  document.body.classList.toggle('mobile-menu-open', open);
+};
+menuToggle.addEventListener('click', () => setMobileMenu(!mobileMenu.classList.contains('open')));
+mobileMenu.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => setMobileMenu(false)));
+mobileMenu.addEventListener('click', (event) => {
+  if (event.target === mobileMenu) setMobileMenu(false);
+});
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && mobileMenu.classList.contains('open')) setMobileMenu(false);
+});
+window.matchMedia('(min-width: 901px)').addEventListener('change', (event) => {
+  if (event.matches) setMobileMenu(false);
+});
